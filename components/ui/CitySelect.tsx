@@ -18,6 +18,10 @@ export function CitySelect({
   className = "chowra-input",
 }: CitySelectProps) {
   const controlled = value !== undefined;
+  const andhraPradeshCities = new Set<string>(
+    siteConfig.cityOptions.andhraPradesh,
+  );
+
   return (
     <select
       name={name}
@@ -35,7 +39,7 @@ export function CitySelect({
       </optgroup>
       <optgroup label="Other Indian Cities">
         {siteConfig.cityOptions.india
-          .filter((city) => !siteConfig.cityOptions.andhraPradesh.includes(city))
+          .filter((city) => !andhraPradeshCities.has(city))
           .map((city) => (
             <option key={`in-${city}`} value={city}>{city}</option>
           ))}
